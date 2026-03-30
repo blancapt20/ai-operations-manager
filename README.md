@@ -68,6 +68,7 @@ Phase 0 focuses on delivering a complete, interview-friendly backend prototype.
 - Agentic classification and decision flow (LLM + deterministic logic)
 - Simulated action execution (`refund_service`, `email_service`, `logging`)
 - Persistence of inputs, decisions, outputs, and execution metadata
+- Structured local observability logs (JSON/JSONL) to keep each case auditable
 
 ### Milestone 0B - Reliability and Evaluation
 
@@ -76,6 +77,12 @@ Phase 0 focuses on delivering a complete, interview-friendly backend prototype.
 - Retrieval quality metrics (`hit@k`, context relevance, answer-grounding checks)
 - Detailed observability logs for each processing step
 - Repeatable CLI workflow for testability and auditing
+- Database-backed observability/metrics layer built from 0A telemetry
+
+#### Telemetry strategy across milestones
+
+- **0A**: Store step-level traces in structured log files (for example `logs/*.jsonl`) with stable fields (`case_id`, `event_id`, `step`, `status`, timestamps, `latency_ms`).
+- **0B**: Move or replicate telemetry into a database for aggregate KPI reporting, benchmark analysis, and historical trend queries.
 
 ## Detailed Objectives (Phase 0)
 
