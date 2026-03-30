@@ -1,0 +1,10 @@
+{
+  "id": "email-1001",
+  "received_at": "2026-03-30T13:00:00Z",
+  "subject": "Charged twice for monthly service",
+  "body": "Hello, I noticed two charges for the same subscription this month.",
+  "customer_id": "cust-email-001",
+  "sender": "user@example.com",
+  "thread_id": "thr-2001",
+  "event_type": "billing_dispute"
+}

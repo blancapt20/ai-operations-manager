@@ -1,0 +1,7 @@
+{"logged_at": "2026-03-30T11:19:12.412559", "event_id": "email-default-001", "source": "email", "timestamp": "2026-03-30T11:19:12+00:00", "event_type": "customer_email", "status": "accepted", "message": null}
+{"logged_at": "2026-03-30T11:19:39.757792", "event_id": "email-1001", "source": "email", "timestamp": "2026-03-30T13:00:00+00:00", "event_type": "billing_dispute", "status": "accepted", "message": null}
+{"logged_at": "2026-03-30T11:19:55.944085", "event_id": "email-1001", "source": "email", "timestamp": "2026-03-30T13:00:00+00:00", "event_type": "billing_dispute", "status": "duplicate_skipped", "message": "duplicate event_id detected"}
+{"logged_at": "2026-03-30T11:20:11.909851", "event_id": "email-2001", "source": "email", "timestamp": "2026-03-30T14:00:00+00:00", "event_type": "billing_dispute", "status": "accepted", "message": null}
+{"logged_at": "2026-03-30T11:20:11.926850", "event_id": "ticket-2001", "source": "tickets", "timestamp": "2026-03-30T14:01:00+00:00", "event_type": "refund_request", "status": "accepted", "message": null}
+{"logged_at": "2026-03-30T11:20:11.926850", "event_id": "internal-2001", "source": "internal_events", "timestamp": "2026-03-30T14:02:00+00:00", "event_type": "duplicate_charge_detected", "status": "accepted", "message": null}
+{"logged_at": "2026-03-30T11:20:11.926850", "event_id": "cli-2001", "source": "cli_json", "timestamp": "2026-03-30T14:03:00+00:00", "event_type": "billing_dispute", "status": "accepted", "message": null}

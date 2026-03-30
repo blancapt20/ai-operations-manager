@@ -1,0 +1,10 @@
+{
+  "ticket_id": "ticket-1001",
+  "created_at": "2026-03-30T13:01:00Z",
+  "title": "Duplicate billing incident",
+  "issue_type": "billing_dispute",
+  "description": "Customer reports duplicate billing for annual plan.",
+  "requester_id": "cust-ticket-001",
+  "priority": "high",
+  "queue": "billing-support"
+}

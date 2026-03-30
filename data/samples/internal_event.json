@@ -1,0 +1,9 @@
+{
+  "event_id": "internal-1001",
+  "timestamp": "2026-03-30T13:02:00Z",
+  "event_name": "billing_alert",
+  "message": "Gateway detected potential duplicate transaction id tx-9912.",
+  "service": "payments",
+  "severity": "warning",
+  "customer_id": "cust-internal-001"
+}

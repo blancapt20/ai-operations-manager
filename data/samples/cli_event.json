@@ -1,0 +1,12 @@
+{
+  "event_id": "cli-1001",
+  "timestamp": "2026-03-30T13:03:00Z",
+  "event_type": "billing_dispute",
+  "subject": "CLI injected event",
+  "body": "Synthetic CLI event for duplicate charge scenario.",
+  "customer_id": "cust-cli-001",
+  "metadata": {
+    "channel": "cli_json",
+    "test_case": "billing_duplicate_charge"
+  }
+}
