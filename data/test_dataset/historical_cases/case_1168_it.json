@@ -1,0 +1,8 @@
+{
+  "source": "Case #1168",
+  "document_type": "Historical Case",
+  "team": "IT",
+  "version": "1.0",
+  "created_at": "2025-04-05",
+  "content": "Case ID: 1168\nCase Type: IT Ticket\nDate: 2025-04-05\nHandled By: IT - Elena Voss\nCustomer or Requestor: Internal Team - Finance\nTitle: VPN instability during finance reconciliation window\n\nIssue Description\nFinance users reported repeated VPN disconnects during month-end reconciliation, interrupting access to shared reporting drives and payment review tools.\n\nSteps Taken\n- Checked network monitoring and identified session drops concentrated in one remote access gateway.\n- Compared the timing with a recent configuration change deployed to the gateway pool.\n- Redirected impacted users to a stable gateway while network engineering reviewed the change.\n- Validated restored access with Finance leads and monitored session stability for the next two hours.\n\nResolution\nRolled back the faulty configuration on the affected gateway and maintained alternate routing until normal stability was confirmed.\n\nFollow-Up\nIT added a higher-change-control requirement for gateway updates during financial close periods.\n\nReference Documents\n- IT Ticket Resolution Guide v2\n- Internal Wiki - IT Support Guidelines"
+}

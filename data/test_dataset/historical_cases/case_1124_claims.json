@@ -1,0 +1,8 @@
+{
+  "source": "Case #1124",
+  "document_type": "Historical Case",
+  "team": "Claims",
+  "version": "1.0",
+  "created_at": "2025-03-29",
+  "content": "Case ID: 1124\nCase Type: Shipping Claim\nDate: 2025-03-29\nHandled By: Claims - Javier Costa\nCustomer or Requestor: Nina Olsen\nTitle: Carrier marked parcel delivered to wrong address cluster\n\nIssue Description\nCustomer reported that tracking showed the order as delivered, but the delivery photo and apartment number in the carrier notes did not match the order address.\n\nSteps Taken\n- Validated the shipping label and confirmed the company transmitted the correct destination details.\n- Compared carrier GPS delivery data with the apartment complex location and identified a mismatch.\n- Requested a carrier trace and reviewed local delivery patterns for similar route issues.\n- Worked with Customer Support to keep the customer updated while the claim was under review.\n\nResolution\nApproved a lost-package replacement because the evidence showed the carrier misdelivered the parcel, then filed a delivery error claim with the carrier.\n\nFollow-Up\nCarrier Relations escalated the recurring route issue to the regional delivery manager.\n\nReference Documents\n- Lost Shipment Runbook v3\n- Shipping Exception Runbook v2"
+}

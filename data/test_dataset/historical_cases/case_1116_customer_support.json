@@ -1,0 +1,8 @@
+{
+  "source": "Case #1116",
+  "document_type": "Historical Case",
+  "team": "Customer Support",
+  "version": "1.0",
+  "created_at": "2025-03-28",
+  "content": "Case ID: 1116\nCase Type: Complaint\nDate: 2025-03-28\nHandled By: Customer Support - Andre Bell\nCustomer or Requestor: Lauren Pierce\nTitle: Customer received repeat damaged replacement\n\nIssue Description\nCustomer contacted support after a replacement order for a ceramic product arrived damaged a second time, expressing frustration and requesting escalation.\n\nSteps Taken\n- Reviewed both order records and confirmed two separate damage-in-transit incidents.\n- Checked warehouse notes to see whether improved protective packaging had been applied to the replacement order.\n- Escalated the case through Tier 2 escalation to a Support Team Lead because the case had become a repeat failure with high churn risk.\n- Coordinated with Claims and Fulfillment to decide whether a third shipment or refund was the better recovery path.\n\nResolution\nApproved a full refund, provided a courtesy store credit, and documented the account to avoid further reshipment until packaging standards were updated.\n\nFollow-Up\nFulfillment added the SKU to a packaging exception review with quality assurance.\n\nReference Documents\n- Complaint Escalation Playbook v1\n- Refund Playbook v2\n- Shipping Exception Runbook v2"
+}

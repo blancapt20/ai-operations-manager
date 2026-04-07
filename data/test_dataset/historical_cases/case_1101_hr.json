@@ -1,0 +1,8 @@
+{
+  "source": "Case #1101",
+  "document_type": "Historical Case",
+  "team": "HR",
+  "version": "1.0",
+  "created_at": "2025-03-26",
+  "content": "Case ID: 1101\nCase Type: HR Request\nDate: 2025-03-26\nHandled By: HR - Caleb Nguyen\nCustomer or Requestor: Internal Employee - Sofia Mendes\nTitle: Correction of missed overtime in previous payroll\n\nIssue Description\nAn employee in Customer Care reported that approved overtime from a weekend campaign shift did not appear on the most recent paycheck.\n\nSteps Taken\n- Compared approved timesheets, manager approval records, and the payroll export for the affected period.\n- Found that the overtime code was approved after the standard cutoff because the manager used the wrong schedule group.\n- Confirmed the hours were legitimate and that no prior manual adjustment had been submitted.\n- Worked with Payroll to determine whether the correction met off-cycle payment criteria.\n\nResolution\nApproved an off-cycle payroll correction for the missed overtime and documented the root cause in the payroll incident tracker.\n\nFollow-Up\nThe employee's manager received coaching on campaign shift approvals and cutoff compliance.\n\nReference Documents\n- Payroll Operations Procedures 2025\n- Internal Wiki - HR Process Questions"
+}

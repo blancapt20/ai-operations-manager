@@ -1,0 +1,8 @@
+{
+  "source": "Case #1194",
+  "document_type": "Historical Case",
+  "team": "IT",
+  "version": "1.0",
+  "created_at": "2025-04-09",
+  "content": "Case ID: 1194\nCase Type: IT Ticket\nDate: 2025-04-09\nHandled By: IT - Nina Cole\nCustomer or Requestor: Internal Employee - Seth Warren\nTitle: Admin dashboard access request exceeded role scope\n\nIssue Description\nAn operations analyst requested access to an admin dashboard that exposed refund overrides and customer PII beyond the analyst's standard role requirements.\n\nSteps Taken\n- Reviewed the access request against the employee's job function and manager justification.\n- Checked whether a lower-privilege reporting view could satisfy the stated business need.\n- Consulted the data owner and Compliance regarding least-privilege expectations for the dashboard.\n- Documented the review outcome and recommended access alternative in the ticket.\n\nResolution\nDenied the elevated access request, granted access to a restricted reporting view instead, and recorded the decision as a least-privilege control action.\n\nFollow-Up\nIT and Compliance planned a review of role templates to reduce future overbroad access requests.\n\nReference Documents\n- Access Control Runbook v2\n- Information Security Policy Set"
+}

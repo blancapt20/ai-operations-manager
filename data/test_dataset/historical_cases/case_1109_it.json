@@ -1,0 +1,8 @@
+{
+  "source": "Case #1109",
+  "document_type": "Historical Case",
+  "team": "IT",
+  "version": "1.0",
+  "created_at": "2025-03-27",
+  "content": "Case ID: 1109\nCase Type: IT Ticket\nDate: 2025-03-27\nHandled By: IT - Hannah Doyle\nCustomer or Requestor: Internal Team - Returns Queue\nTitle: Shared inbox permission removed during directory sync\n\nIssue Description\nThe Returns team reported that three agents lost access to a shared mailbox used for high-priority refund escalations after a scheduled directory synchronization.\n\nSteps Taken\n- Checked recent identity sync changes and found a group nesting update applied the previous evening.\n- Confirmed the affected users were still in the correct department and role assignments.\n- Restored mailbox permissions through the admin console and tested access with one of the impacted users.\n- Reviewed whether any messages were missed during the outage window and notified Operations leadership.\n\nResolution\nReinstated access for all affected users within the hour and confirmed no escalation emails were permanently lost.\n\nFollow-Up\nIT created a change review item for nested group updates affecting operational mailboxes.\n\nReference Documents\n- IT Ticket Resolution Guide v2\n- Access Control Runbook v2"
+}

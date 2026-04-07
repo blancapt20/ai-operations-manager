@@ -1,0 +1,8 @@
+{
+  "source": "Case #1176",
+  "document_type": "Historical Case",
+  "team": "Customer Support",
+  "version": "1.0",
+  "created_at": "2025-04-06",
+  "content": "Case ID: 1176\nCase Type: Complaint\nDate: 2025-04-06\nHandled By: Customer Support - Isaac Moreno\nCustomer or Requestor: Paula Knight\nTitle: Escalation over repeated order cancellation on limited-release item\n\nIssue Description\nCustomer complained after two consecutive attempts to purchase a limited-release item were canceled, alleging the company was overselling inventory during launches.\n\nSteps Taken\n- Reviewed both order attempts and confirmed inventory reserved at checkout was later released during anti-fraud review timeout.\n- Checked whether the customer's payment method or address triggered any unusual fraud signals and found none.\n- Escalated to Operations and Fraud to confirm the cancellation root cause before responding.\n- Reviewed whether any manual reorder path or priority restock notification could be offered.\n\nResolution\nProvided a clear explanation, refunded both holds promptly, and offered priority notification for the next restock because the cancellations were caused by an internal reservation defect rather than customer risk.\n\nFollow-Up\nOperations opened a defect ticket for the launch inventory reservation timeout behavior.\n\nReference Documents\n- Complaint Escalation Playbook v1\n- Order Cancellation Playbook v1"
+}

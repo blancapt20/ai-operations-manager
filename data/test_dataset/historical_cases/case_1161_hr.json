@@ -1,0 +1,8 @@
+{
+  "source": "Case #1161",
+  "document_type": "Historical Case",
+  "team": "HR",
+  "version": "1.0",
+  "created_at": "2025-04-04",
+  "content": "Case ID: 1161\nCase Type: HR Request\nDate: 2025-04-04\nHandled By: HR - Marcus Lee\nCustomer or Requestor: Internal Employee - Chloe Bennett\nTitle: Onboarding delay caused by incomplete I-9 documentation\n\nIssue Description\nA new hire was unable to start customer-facing work because required identity documentation had not been fully completed before the start date.\n\nSteps Taken\n- Confirmed which onboarding documents were missing and whether temporary work restrictions applied.\n- Coordinated with the hiring manager to adjust day-one assignments away from customer data access.\n- Contacted the employee with specific instructions on acceptable documentation and completion timing.\n- Updated the HRIS onboarding checklist and alerted IT not to expand access until compliance requirements were met.\n\nResolution\nCompleted the missing documentation on the next business day and cleared the employee for full onboarding once HR validated compliance.\n\nFollow-Up\nPeople Operations added an earlier pre-start reminder for identity verification tasks.\n\nReference Documents\n- Employee Onboarding Runbook v2\n- Internal Wiki - HR Process Questions"
+}

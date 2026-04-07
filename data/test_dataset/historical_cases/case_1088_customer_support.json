@@ -1,0 +1,8 @@
+{
+  "source": "Case #1088",
+  "document_type": "Historical Case",
+  "team": "Customer Support",
+  "version": "1.0",
+  "created_at": "2025-03-23",
+  "content": "Case ID: 1088\nCase Type: Refund\nDate: 2025-03-23\nHandled By: Customer Support - Miles Turner\nCustomer or Requestor: Elena Garcia\nTitle: Order canceled after warehouse stockout\n\nIssue Description\nCustomer complained that an order was canceled for stock reasons two days after checkout even though the product page continued to show available inventory.\n\nSteps Taken\n- Confirmed the cancellation was system-generated after a late warehouse inventory reconciliation.\n- Reviewed the order timeline and verified payment capture had already occurred before the cancellation event.\n- Escalated to Operations for a same-day refund because the customer had selected expedited shipping for an event date.\n- Checked whether a replacement SKU or alternate fulfillment location could salvage the order.\n\nResolution\nProcessed a full refund including shipping charges and issued a one-time goodwill credit because the stockout was caused by an internal sync delay.\n\nFollow-Up\nOperations and Catalog teams reviewed the inventory feed lag impacting the affected product family.\n\nReference Documents\n- Order Cancellation Playbook v1\n- Refund Playbook v2"
+}

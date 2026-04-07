@@ -1,0 +1,8 @@
+{
+  "source": "Case #1182",
+  "document_type": "Historical Case",
+  "team": "Claims",
+  "version": "1.0",
+  "created_at": "2025-04-07",
+  "content": "Case ID: 1182\nCase Type: Shipping Claim\nDate: 2025-04-07\nHandled By: Claims - Mei Tan\nCustomer or Requestor: Oliver Grant\nTitle: International parcel delayed in customs with perishable item\n\nIssue Description\nAn international order containing a time-sensitive product was held in customs beyond the acceptable delivery window, creating likely spoilage risk and customer dissatisfaction.\n\nSteps Taken\n- Verified export paperwork and confirmed the shipment was handed to the carrier with complete customs data.\n- Reviewed carrier and broker updates to determine whether release was likely within a reasonable timeframe.\n- Checked policy coverage for perishable or time-sensitive international shipments delayed outside customer control.\n- Coordinated with Customer Support and Finance on whether to replace, refund, or await customs release.\n\nResolution\nApproved a refund because the item was no longer likely to arrive in usable condition and documented the loss as a customs-delay claim for recovery review.\n\nFollow-Up\nInternational Operations reviewed whether the product should remain eligible for that destination lane.\n\nReference Documents\n- Lost Shipment Runbook v3\n- Shipping Exception Runbook v2"
+}

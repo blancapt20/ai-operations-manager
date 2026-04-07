@@ -1,0 +1,8 @@
+{
+  "source": "Case #1052",
+  "document_type": "Historical Case",
+  "team": "Customer Support",
+  "version": "1.0",
+  "created_at": "2025-03-12",
+  "content": "Case ID: 1052\nCase Type: Refund\nDate: 2025-03-12\nHandled By: Customer Support - Lena Ortiz\nCustomer or Requestor: Marta Ellis\nTitle: Duplicate subscription charge after plan migration\n\nIssue Description\nCustomer reported being charged twice after moving from a monthly plan to a quarterly subscription during a promotional weekend.\n\nSteps Taken\n- Reviewed payment history in the order platform and confirmed two successful captures within the same billing window.\n- Checked promotion logs and found the original subscription was not fully canceled before the upgrade order processed.\n- Verified there was no related chargeback or previous concession on the account.\n- Coordinated with Billing Operations to confirm the extra charge would not recur in the next cycle.\n\nResolution\nIssued a full refund for the duplicate monthly charge, added a note to preserve the quarterly plan, and sent the customer a written confirmation with a three-to-five business day bank posting window.\n\nFollow-Up\nBilling engineering opened a defect ticket to prevent duplicate billing during subscription plan transitions.\n\nReference Documents\n- Refund Playbook v2\n- Customer Operations SOP Library"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "Case #1064",
+  "document_type": "Historical Case",
+  "team": "Claims",
+  "version": "1.0",
+  "created_at": "2025-03-18",
+  "content": "Case ID: 1064\nCase Type: Shipping Claim\nDate: 2025-03-18\nHandled By: Claims - Dana Brooks\nCustomer or Requestor: Rafael Soto\nTitle: High-value package damaged in transit\n\nIssue Description\nA customer submitted photos of a premium kitchen appliance arriving with visible exterior damage and a cracked display panel.\n\nSteps Taken\n- Validated the shipment tracking and confirmed the carton showed carrier damage notes at delivery.\n- Compared customer photos with warehouse pack-out images to confirm the item left the facility intact.\n- Reviewed claim eligibility against the carrier's damage reporting window and item value threshold.\n- Prepared the carrier claim file with proof of value, photos, and order documentation.\n\nResolution\nApproved an immediate replacement shipment for the customer and filed a reimbursement claim with the carrier for the damaged unit.\n\nFollow-Up\nFulfillment flagged the packaging configuration for review because two similar damage cases were reported in the same week.\n\nReference Documents\n- Lost Shipment Runbook v3\n- Shipping Exception Runbook v2"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "Case #1080",
+  "document_type": "Historical Case",
+  "team": "IT",
+  "version": "1.0",
+  "created_at": "2025-03-21",
+  "content": "Case ID: 1080\nCase Type: IT Ticket\nDate: 2025-03-21\nHandled By: IT - Victor Hale\nCustomer or Requestor: Internal Employee - Noah Patel\nTitle: MFA enrollment failure for new warehouse supervisor\n\nIssue Description\nA newly hired warehouse supervisor could access email with a temporary password but could not complete multi-factor authentication enrollment on the identity platform.\n\nSteps Taken\n- Verified the user record had been created correctly from the onboarding feed.\n- Checked the identity provider logs and found a mismatched mobile device enrollment attribute from a pre-hire test account.\n- Removed the stale enrollment reference and forced a new sign-in session.\n- Stayed on a support call with the employee to validate app-based MFA registration and backup code generation.\n\nResolution\nRestored account access, completed MFA enrollment successfully, and confirmed the employee could access email, scheduling, and warehouse dashboards.\n\nFollow-Up\nIT updated the onboarding checklist to avoid reusing test enrollment attributes on production identities.\n\nReference Documents\n- Information Security Policy Set\n- IT Ticket Resolution Guide v2"
+}

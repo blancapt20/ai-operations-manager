@@ -1,0 +1,8 @@
+{
+  "source": "Case #1153",
+  "document_type": "Historical Case",
+  "team": "Claims",
+  "version": "1.0",
+  "created_at": "2025-04-03",
+  "content": "Case ID: 1153\nCase Type: Chargeback Claim\nDate: 2025-04-03\nHandled By: Claims - Brooke Salazar\nCustomer or Requestor: Tyler Ames\nTitle: Friendly fraud dispute on repeat high-risk account\n\nIssue Description\nA cardholder disputed a valid order as unauthorized even though the account had multiple previous successful deliveries to the same address and device.\n\nSteps Taken\n- Reviewed order risk signals including device fingerprint, IP consistency, and account history.\n- Confirmed prior deliveries and customer service interactions tied to the same email, address, and payment method.\n- Collected checkout logs, shipment proof, and prior login records for representment.\n- Consulted Risk Operations because the account showed a pattern of post-delivery disputes.\n\nResolution\nSubmitted a robust representment package and restricted the account from future manual concessions pending the dispute outcome.\n\nFollow-Up\nRisk Operations considered placing the account on enhanced review for future purchases.\n\nReference Documents\n- Internal Wiki - Refund Questions\n- Refund Playbook v2"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "Case #1140",
+  "document_type": "Historical Case",
+  "team": "IT",
+  "version": "1.0",
+  "created_at": "2025-04-01",
+  "content": "Case ID: 1140\nCase Type: IT Ticket\nDate: 2025-04-01\nHandled By: IT - Omar Singh\nCustomer or Requestor: Internal Employee - Grace Turner\nTitle: Password reset request linked to suspected phishing\n\nIssue Description\nAn employee reported that a password reset prompt appeared after clicking a suspicious email link and asked whether the account had been compromised.\n\nSteps Taken\n- Immediately disabled active sessions and forced a password reset through the identity platform.\n- Reviewed sign-in logs for unfamiliar IP addresses, failed attempts, and abnormal geolocation events.\n- Examined the reported email and confirmed it matched a current phishing campaign targeting retail organizations.\n- Checked whether the employee had entered credentials into the phishing page and whether MFA prevented account takeover.\n\nResolution\nReset the employee's credentials, confirmed no unauthorized login succeeded, and documented the event as a contained phishing-related security ticket.\n\nFollow-Up\nSecurity Awareness sent a reminder bulletin to staff about the active phishing pattern.\n\nReference Documents\n- Information Security Policy Set\n- IT Ticket Resolution Guide v2"
+}
