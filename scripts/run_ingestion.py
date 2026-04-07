@@ -12,9 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.config import load_config
+from src.config import ConfigError, load_config
 from src.common.contracts import EventSource
 from src.ingestion.service import IngestionService, count_statuses, default_payload_for
+from src.persistence.db import build_engine, check_database_health
+from src.persistence.migrations import apply_migrations
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -40,12 +42,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Path to JSON array with records: [{'source': ..., 'payload': {...}}].",
     )
     parser.add_argument(
-        "--storage-dir",
-        type=str,
-        default="data",
-        help="Directory where ingestion JSONL artifacts are written.",
-    )
-    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show planned ingestion records without writing to persistence.",
@@ -54,6 +50,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--use-defaults",
         action="store_true",
         help="Allow built-in sample payloads when input files are not provided.",
+    )
+    parser.add_argument(
+        "--run-migrations",
+        action="store_true",
+        help="Apply pending SQL migrations before ingestion.",
     )
     return parser
 
@@ -97,7 +98,23 @@ def _build_records(args: argparse.Namespace) -> list[dict[str, Any]]:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    config = load_config()
+    try:
+        config = load_config()
+    except ConfigError as exc:
+        print(f"[run_ingestion] error: {exc}", file=sys.stderr)
+        return 2
+
+    engine = build_engine(config.database_url)
+    try:
+        check_database_health(engine)
+    except Exception as exc:
+        print(f"[run_ingestion] error: database unavailable ({exc})", file=sys.stderr)
+        return 2
+
+    if args.run_migrations:
+        applied = apply_migrations(engine, ROOT / "migrations")
+        print(f"[run_ingestion] applied_migrations={applied}")
+
     try:
         records = _build_records(args)
     except ValueError as exc:
@@ -112,8 +129,11 @@ def main() -> int:
         print(f"[run_ingestion] statuses_preview={{'pending': {len(records)}}}")
         return 0
 
-    service = IngestionService(storage_dir=Path(args.storage_dir))
-    results = service.ingest_records(records)
+    service = IngestionService(database_url=config.database_url)
+    try:
+        results = service.ingest_records(records)
+    finally:
+        service.close()
     status_summary = count_statuses(results)
     print(
         f"[run_ingestion] records={len(records)} source={args.source} "

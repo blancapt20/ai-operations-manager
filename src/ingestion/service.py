@@ -10,7 +10,9 @@ from typing import Any
 from src.common.contracts import EventSource, NormalizedEvent
 from src.common.validation import ValidationError, validate_normalized_event
 from src.ingestion.adapters import ADAPTERS
+from src.persistence.db import build_engine, build_session_factory
 from src.persistence.ingestion_store import IngestionStore
+from src.persistence.migrations import apply_migrations
 
 
 @dataclass(slots=True)
@@ -24,8 +26,14 @@ class IngestionResult:
 class IngestionService:
     """Ingests source payloads, normalizes, validates, and persists them."""
 
-    def __init__(self, storage_dir: Path) -> None:
-        self.store = IngestionStore(storage_dir)
+    def __init__(self, database_url: str) -> None:
+        self.engine = build_engine(database_url)
+        apply_migrations(self.engine, Path(__file__).resolve().parents[2] / "migrations")
+        session_factory = build_session_factory(self.engine)
+        self.store = IngestionStore(session_factory)
+
+    def close(self) -> None:
+        self.engine.dispose()
 
     def ingest_payload(self, source: EventSource, payload: dict[str, Any]) -> IngestionResult:
         adapter = ADAPTERS[source]

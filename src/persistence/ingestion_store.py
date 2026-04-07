@@ -1,60 +1,66 @@
-"""File-backed persistence for ingestion raw/normalized records."""
+"""Database-backed persistence for ingestion records."""
 
 from __future__ import annotations
 
 import json
-from dataclasses import asdict
 from datetime import datetime
-from pathlib import Path
 from typing import Any
 
+from sqlalchemy import func, select
+from sqlalchemy.orm import sessionmaker
+
 from src.common.contracts import NormalizedEvent
-
-
-def _serialize_datetime(value: datetime) -> str:
-    return value.isoformat()
-
-
-def _json_default(value: Any) -> Any:
-    if isinstance(value, datetime):
-        return _serialize_datetime(value)
-    raise TypeError(f"Object of type {type(value).__name__} is not JSON serializable")
+from src.persistence.models import (
+    IngestionMetadataRecord,
+    NormalizedEventRecord,
+    RawEvent,
+)
 
 
 class IngestionStore:
-    """Stores ingestion records as JSONL for local auditability."""
+    """Stores ingestion records in SQL tables."""
 
-    def __init__(self, base_dir: Path) -> None:
-        self.base_dir = Path(base_dir)
-        self.base_dir.mkdir(parents=True, exist_ok=True)
-        self.raw_path = self.base_dir / "raw_events.jsonl"
-        self.normalized_path = self.base_dir / "normalized_events.jsonl"
-        self.metadata_path = self.base_dir / "ingestion_metadata.jsonl"
+    def __init__(self, session_factory: sessionmaker) -> None:
+        self.session_factory = session_factory
 
     def has_event_id(self, event_id: str) -> bool:
-        if not self.normalized_path.exists():
-            return False
-        with self.normalized_path.open("r", encoding="utf-8") as handle:
-            for line in handle:
-                line = line.strip()
-                if not line:
-                    continue
-                record = json.loads(line)
-                if record.get("event_id") == event_id:
-                    return True
-        return False
+        with self.session_factory() as session:
+            existing = session.execute(
+                select(NormalizedEventRecord.id).where(NormalizedEventRecord.event_id == event_id)
+            ).first()
+            return existing is not None
 
     def persist_raw(self, source: str, payload: dict[str, Any]) -> None:
-        envelope = {
-            "ingested_at": datetime.utcnow().isoformat(),
-            "source": source,
-            "raw_payload": payload,
-        }
-        self._append_jsonl(self.raw_path, envelope)
+        with self.session_factory() as session:
+            next_id = self._next_id(session, RawEvent)
+            session.add(
+                RawEvent(
+                    id=next_id,
+                    ingested_at=datetime.utcnow(),
+                    source=source,
+                    raw_payload=json.dumps(payload),
+                )
+            )
+            session.commit()
 
     def persist_normalized(self, event: NormalizedEvent) -> None:
-        record = asdict(event)
-        self._append_jsonl(self.normalized_path, record)
+        with self.session_factory() as session:
+            next_id = self._next_id(session, NormalizedEventRecord)
+            session.add(
+                NormalizedEventRecord(
+                    id=next_id,
+                    event_id=event.event_id,
+                    source=event.source.value,
+                    timestamp=event.timestamp,
+                    event_type=event.event_type,
+                    body=event.body,
+                    subject=event.subject,
+                    customer_id=event.customer_id,
+                    metadata_json=json.dumps(event.metadata),
+                    created_at=datetime.utcnow(),
+                )
+            )
+            session.commit()
 
     def persist_metadata(
         self,
@@ -66,37 +72,78 @@ class IngestionStore:
         status: str,
         message: str | None = None,
     ) -> None:
-        envelope = {
-            "logged_at": datetime.utcnow().isoformat(),
-            "event_id": event_id,
-            "source": source,
-            "timestamp": timestamp,
-            "event_type": event_type,
-            "status": status,
-            "message": message,
-        }
-        self._append_jsonl(self.metadata_path, envelope)
+        with self.session_factory() as session:
+            next_id = self._next_id(session, IngestionMetadataRecord)
+            session.add(
+                IngestionMetadataRecord(
+                    id=next_id,
+                    logged_at=datetime.utcnow(),
+                    event_id=event_id,
+                    source=source,
+                    timestamp=_parse_iso_datetime(timestamp),
+                    event_type=event_type,
+                    status=status,
+                    message=message,
+                )
+            )
+            session.commit()
 
-    def read_jsonl(self, kind: str) -> list[dict[str, Any]]:
-        target = {
-            "raw": self.raw_path,
-            "normalized": self.normalized_path,
-            "metadata": self.metadata_path,
-        }.get(kind)
-        if target is None:
-            raise ValueError("kind must be one of: raw, normalized, metadata")
-        if not target.exists():
-            return []
+    def read_records(self, kind: str) -> list[dict[str, Any]]:
+        with self.session_factory() as session:
+            if kind == "raw":
+                rows = session.execute(select(RawEvent).order_by(RawEvent.id)).scalars().all()
+                return [
+                    {
+                        "id": row.id,
+                        "ingested_at": row.ingested_at.isoformat(),
+                        "source": row.source,
+                        "raw_payload": json.loads(row.raw_payload),
+                    }
+                    for row in rows
+                ]
+            if kind == "normalized":
+                rows = session.execute(
+                    select(NormalizedEventRecord).order_by(NormalizedEventRecord.id)
+                ).scalars().all()
+                return [
+                    {
+                        "id": row.id,
+                        "event_id": row.event_id,
+                        "source": row.source,
+                        "timestamp": row.timestamp.isoformat(),
+                        "event_type": row.event_type,
+                        "body": row.body,
+                        "subject": row.subject,
+                        "customer_id": row.customer_id,
+                        "metadata": json.loads(row.metadata_json),
+                    }
+                    for row in rows
+                ]
+            if kind == "metadata":
+                rows = session.execute(
+                    select(IngestionMetadataRecord).order_by(IngestionMetadataRecord.id)
+                ).scalars().all()
+                return [
+                    {
+                        "id": row.id,
+                        "logged_at": row.logged_at.isoformat(),
+                        "event_id": row.event_id,
+                        "source": row.source,
+                        "timestamp": row.timestamp.isoformat(),
+                        "event_type": row.event_type,
+                        "status": row.status,
+                        "message": row.message,
+                    }
+                    for row in rows
+                ]
+        raise ValueError("kind must be one of: raw, normalized, metadata")
 
-        records: list[dict[str, Any]] = []
-        with target.open("r", encoding="utf-8") as handle:
-            for line in handle:
-                line = line.strip()
-                if line:
-                    records.append(json.loads(line))
-        return records
+    def _next_id(self, session: Any, model: Any) -> int:
+        current_max = session.execute(select(func.max(model.id))).scalar_one()
+        if current_max is None:
+            return 1
+        return int(current_max) + 1
 
-    def _append_jsonl(self, path: Path, payload: dict[str, Any]) -> None:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(payload, default=_json_default) + "\n")
+
+def _parse_iso_datetime(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))

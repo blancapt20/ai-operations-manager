@@ -299,15 +299,25 @@ python -m venv .venv
 # Windows
 .venv\Scripts\activate
 
-# 3) Install dependencies (once requirements are added)
+# 3) Install dependencies
 pip install -r requirements.txt
+
+# 4) Configure database connection (Supabase/Postgres recommended)
+# PowerShell example:
+$env:DATABASE_URL="postgresql+psycopg://<user>:<password>@<host>:5432/<db>"
+
+# 5) Apply migrations
+python scripts/apply_migrations.py
 ```
 
 ### Run (target workflow)
 
 ```bash
 # Simulate ingestion
-python scripts/run_ingestion.py
+python scripts/run_ingestion.py --source email --input-file data/samples/email_event.json
+
+# Simulate mixed batch ingestion
+python scripts/run_ingestion.py --batch-file data/samples/mixed_source_batch.json
 
 # Build/update RAG index
 python scripts/build_knowledge_index.py
