@@ -24,7 +24,9 @@ def apply_migrations(engine: Engine, migrations_dir: Path) -> list[str]:
         )
 
         for migration_file in migration_files:
-            version = migration_file.stem
+            if not _migration_matches_dialect(migration_file.name, engine.dialect.name):
+                continue
+            version = _migration_version(migration_file.name)
             existing = connection.execute(
                 text("SELECT version FROM schema_migrations WHERE version = :version"),
                 {"version": version},
@@ -43,3 +45,18 @@ def apply_migrations(engine: Engine, migrations_dir: Path) -> list[str]:
             )
             applied.append(version)
     return applied
+
+
+def _migration_matches_dialect(filename: str, dialect_name: str) -> bool:
+    if ".postgres." in filename:
+        return dialect_name == "postgresql"
+    if ".sqlite." in filename:
+        return dialect_name == "sqlite"
+    return True
+
+
+def _migration_version(filename: str) -> str:
+    for suffix in (".postgres.sql", ".sqlite.sql", ".sql"):
+        if filename.endswith(suffix):
+            return filename[: -len(suffix)]
+    return Path(filename).stem

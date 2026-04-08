@@ -11,7 +11,14 @@ from sqlalchemy.orm import Session, sessionmaker
 
 
 def build_engine(database_url: str) -> Engine:
-    connect_args = {"check_same_thread": False} if database_url.startswith("sqlite") else {}
+    if database_url.startswith("sqlite"):
+        connect_args = {"check_same_thread": False}
+    elif database_url.startswith("postgresql+psycopg"):
+        # Disable server-side prepared statements to avoid conflicts with
+        # transaction-pooled Postgres connections.
+        connect_args = {"prepare_threshold": None}
+    else:
+        connect_args = {}
     return create_engine(database_url, future=True, connect_args=connect_args)
 
 

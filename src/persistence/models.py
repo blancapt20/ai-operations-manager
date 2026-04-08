@@ -95,7 +95,12 @@ class KnowledgeDocumentRecord(Base):
     document_type: Mapped[str] = mapped_column(String(128), nullable=False, index=True)
     version: Mapped[str | None] = mapped_column(String(64), nullable=True)
     team: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    valid_from: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    valid_to: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
+    source_path: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
 
 class KnowledgeChunkRecord(Base):
@@ -112,8 +117,35 @@ class KnowledgeChunkRecord(Base):
     )
     chunk_index: Mapped[int] = mapped_column(Integer, nullable=False)
     text: Mapped[str] = mapped_column(Text, nullable=False)
+    source: Mapped[str | None] = mapped_column(String(128), nullable=True, index=True)
+    document_type: Mapped[str | None] = mapped_column(String(128), nullable=True, index=True)
+    version: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    team: Mapped[str | None] = mapped_column(String(128), nullable=True, index=True)
+    valid_from: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    valid_to: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     metadata_json: Mapped[str] = mapped_column("metadata", Text, nullable=False, default="{}")
+    content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+
+
+class KnowledgeChunkEmbeddingRecord(Base):
+    __tablename__ = "knowledge_chunk_embeddings"
+    __table_args__ = (UniqueConstraint("chunk_id", name="uq_knowledge_chunk_embedding_chunk_id"),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    chunk_id: Mapped[str] = mapped_column(
+        String(128),
+        ForeignKey("knowledge_chunks.chunk_id"),
+        nullable=False,
+        index=True,
+    )
+    embedding_json: Mapped[str] = mapped_column("embedding", Text, nullable=False)
+    embedding_model: Mapped[str] = mapped_column(String(128), nullable=False)
+    embedding_dimensions: Mapped[int] = mapped_column(Integer, nullable=False)
+    content_hash: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
 
 class RetrievalEventRecord(Base):
@@ -123,5 +155,7 @@ class RetrievalEventRecord(Base):
     case_id: Mapped[str] = mapped_column(String(128), nullable=False, index=True)
     query_text: Mapped[str] = mapped_column(Text, nullable=False)
     top_k: Mapped[int] = mapped_column(Integer, nullable=False, default=5)
+    retrieval_status: Mapped[str] = mapped_column(String(64), nullable=False, default="ok")
     retrieved_chunk_ids_json: Mapped[str] = mapped_column("retrieved_chunk_ids", Text, nullable=False)
+    scores_json: Mapped[str] = mapped_column("scores", Text, nullable=False, default="[]")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)

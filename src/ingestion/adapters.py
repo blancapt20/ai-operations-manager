@@ -52,7 +52,7 @@ def from_tickets(payload: Mapping[str, Any]) -> dict[str, Any]:
         "source": source.value,
         "timestamp": timestamp,
         "event_type": event_type,
-        "subject": payload.get("title"),
+        "subject": payload.get("title") or event_type,
         "body": body,
         "customer_id": payload.get("requester_id"),
         "metadata": {
@@ -76,7 +76,7 @@ def from_internal_events(payload: Mapping[str, Any]) -> dict[str, Any]:
         "source": source.value,
         "timestamp": timestamp,
         "event_type": event_type,
-        "subject": payload.get("title"),
+        "subject": payload.get("title") or event_type,
         "body": body,
         "customer_id": payload.get("customer_id"),
         "metadata": {
@@ -90,12 +90,13 @@ def from_internal_events(payload: Mapping[str, Any]) -> dict[str, Any]:
 
 def from_cli_json(payload: Mapping[str, Any]) -> dict[str, Any]:
     source = EventSource.CLI_JSON
+    event_type = _require_str(payload, "event_type", source)
     canonical: dict[str, Any] = {
         "event_id": _require_str(payload, "event_id", source),
         "source": source.value,
         "timestamp": _require_str(payload, "timestamp", source),
-        "event_type": _require_str(payload, "event_type", source),
-        "subject": payload.get("subject"),
+        "event_type": event_type,
+        "subject": payload.get("subject") or event_type,
         "body": _require_str(payload, "body", source),
         "customer_id": payload.get("customer_id"),
         "metadata": payload.get("metadata", {"channel": "cli_json"}),

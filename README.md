@@ -322,6 +322,9 @@ python scripts/run_ingestion.py --batch-file data/samples/mixed_source_batch.jso
 # Build/update RAG index
 python scripts/build_knowledge_index.py
 
+# Query the existing RAG index
+python scripts/query_knowledge.py --query "duplicate charge customer complaint"
+
 # Process pending cases through the agent core
 python scripts/run_pipeline.py
 

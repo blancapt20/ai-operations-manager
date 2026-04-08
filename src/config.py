@@ -65,7 +65,7 @@ def load_config() -> AppConfig:
         model_name=os.getenv("MODEL_NAME", "gpt-4.1-mini"),
         embedding_model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small"),
         database_url=_required_env("DATABASE_URL"),
-        vector_db_provider=os.getenv("VECTOR_DB_PROVIDER", "chroma"),
+        vector_db_provider=os.getenv("VECTOR_DB_PROVIDER", "pgvector"),
         openai_api_key=os.getenv("OPENAI_API_KEY"),
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
         google_api_key=os.getenv("GOOGLE_API_KEY"),

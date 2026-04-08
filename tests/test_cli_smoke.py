@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = (
     ROOT / "scripts" / "run_ingestion.py",
     ROOT / "scripts" / "build_knowledge_index.py",
+    ROOT / "scripts" / "query_knowledge.py",
     ROOT / "scripts" / "run_pipeline.py",
 )
 

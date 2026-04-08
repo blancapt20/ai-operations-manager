@@ -23,6 +23,7 @@ python scripts/apply_migrations.py
 ```bash
 python scripts/run_ingestion.py --help
 python scripts/build_knowledge_index.py --help
+python scripts/query_knowledge.py --help
 python scripts/run_pipeline.py --help
 ```
 
